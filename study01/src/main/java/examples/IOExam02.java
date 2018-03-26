@@ -5,8 +5,10 @@ import java.io.IOException;
 public class IOExam02 {
     public static void main(String[] args) throws IOException {
         int read = -1;
+
         while((read = System.in.read()) != -1){ //EOF : -1
-            System.out.write(read);
+//            System.out.write(read);
+//            System.out.println(read);
         }
     }
 }
