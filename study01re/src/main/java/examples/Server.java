@@ -13,8 +13,9 @@ public class Server {
         BufferedReader br = new BufferedReader(isr);
 
         String fileName = br.readLine();
-        FileOutputStream fos = new FileOutputStream(fileName+".txt");
-        PrintWriter pw = new PrintWriter(fos);
+//        FileOutputStream fos = new FileOutputStream(fileName+".txt");
+//        PrintWriter pw = new PrintWriter(fos);
+        PrintWriter pw = new PrintWriter(new FileWriter(fileName+".txt"));
 
         String line = null;
         while((line = br.readLine()) != null){
@@ -22,8 +23,9 @@ public class Server {
             if(line.equals("quit"))
                 break;
             pw.println(line);
-            pw.flush();
         }
         pw.close();
+        client.close();
+        listener.close();
     }
 }
