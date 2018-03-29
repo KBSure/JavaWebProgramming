@@ -3,18 +3,55 @@ package examples;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 public class WebApplicationServer implements Runnable{
     private int port;
     private DefaultServlet defaultServlet;
+    private Map<String, RequestMapping> map; // path(key), RequestMapping(value)
 
     public WebApplicationServer(int port) {
         this.port = port;
         defaultServlet = new DefaultServlet();
 
+        initServlet();
+
         WasShutdownHook wasShutdownHook = new WasShutdownHook(this);
         // jvm 이 종료될 때 실행할 Thread를 등록한다.
         Runtime.getRuntime().addShutdownHook(wasShutdownHook);
+    }
+
+    // Map을 초기화
+    private void initServlet(){
+        // servlet.properties에서 정보를 읽어들여 map을 초기화한다.
+        map = new HashMap<>();
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream propStream =
+                classLoader.getResourceAsStream("servlet.properties");
+
+        Properties prop = new Properties();
+        try {
+            prop.load(propStream);
+
+            Set<String> keys = prop.stringPropertyNames();
+            for (String path : keys) {
+                String className = prop.getProperty(path);
+                RequestMapping mapping = new RequestMapping();
+                mapping.setPath(path);
+                mapping.setServletClassName(className);
+
+                // class이름을 가지고 인스턴스를 생성한다.
+                // Servlet s = new HiServlet();
+                Class clazz = Class.forName(className);
+                Servlet s = (Servlet)clazz.newInstance();
+                mapping.setSerlvet(s);
+                s.init();
+                map.put(path, mapping);
+            }
+        }catch(Exception ex){}
     }
 
     public void destroy(){
@@ -38,6 +75,7 @@ public class WebApplicationServer implements Runnable{
                         ex.printStackTrace();
                     }
                 }).start();
+
             }
 
         }catch(Exception ex){
@@ -84,8 +122,15 @@ public class WebApplicationServer implements Runnable{
         }
         System.out.println(request);
 
-
-        defaultServlet.service(request, response);
+        // 사용자가 요청한 path가 map에 있으면 map에 있는 Servlet을 실행
+        // 없으면 defaultServlet을 실행
+        if(map.containsKey(request.getPath())){
+            RequestMapping mapping = map.get(request.getPath());
+            Servlet servlet = mapping.getSerlvet();
+            servlet.service(request, response);
+        }else {
+            defaultServlet.service(request, response);
+        }
 
         out.close();
         in.close();
