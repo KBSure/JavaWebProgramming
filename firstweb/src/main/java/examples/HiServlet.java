@@ -5,9 +5,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
-
 /*
 http://lcalhost:8080/hi
  */
@@ -21,9 +21,21 @@ public class HiServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html"); //오타 금지
+        response.setContentType("text/html"); // 오타 나면 안된다.....
         PrintWriter pw = response.getWriter();
 
-        pw.println("<h1>Hi Servlet</h1>");
+        HttpSession session = request.getSession();
+        String name = (String)session.getAttribute("name");
+        if(name == null){
+            session.setAttribute("name", "urstory");
+        }
+//        if(session.isNew()){
+//            session.setAttribute("name", "urstory");
+//        }else{
+//            String name = (String)session.getAttribute("name");
+//            System.out.println("name : "  + name);
+//        }
+
+        pw.println("<h1>hi Servlet</h1>");
     }
 }

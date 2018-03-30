@@ -8,6 +8,13 @@
   <name>firstweb Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
+      <!-- https://mvnrepository.com/artifact/jstl/jstl -->
+      <dependency>
+          <groupId>jstl</groupId>
+          <artifactId>jstl</artifactId>
+          <version>1.2</version>
+      </dependency>
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -15,7 +22,7 @@
       <scope>test</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
-    <!--compile할 때만 쓴다. tomcat이 배포해서 실행하니까-->
+    <!--provided이면 compile할 때만 쓴다. tomcat이 배포해서 실행하니까-->
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -23,7 +30,9 @@
       <scope>provided</scope>
     </dependency>
 
+
   </dependencies>
+
 
 
     <build>
