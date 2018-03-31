@@ -7,11 +7,25 @@
 <c:if test="${name != null}">
     <h3>${name}</h3>
 </c:if>
+
+<c:forEach items="${iter}" var="item">
+    ${item}<br>
+</c:forEach>
+
+<c:choose>
+    <c:when test="${myNumber < 500}">
+        TRUE
+    </c:when>
+    <c:when test="${myNumber >= 500}">
+        FALSE
+    </c:when>
+</c:choose>
+
 <c:if test="${myNumber < 500}">
-    <h3>True</h3>
+    TRUE
 </c:if>
-<c:if test="${myNumber >=500}">
-    <h3>False</h3>
+<c:if test="${myNumber >= 500}">
+    FALSE
 </c:if>
 </body>
 </html>
