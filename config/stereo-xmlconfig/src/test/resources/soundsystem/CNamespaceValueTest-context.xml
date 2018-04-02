@@ -4,11 +4,17 @@
   xmlns:c="http://www.springframework.org/schema/c"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+  <!--
+     BlackDisc compactDisc = new BlankDisc("Sgt. Pepper's Lonely Hearts Club Band", The Beatles");
+  -->
   <bean id="compactDisc" class="soundsystem.BlankDisc"
-        c:_0="Sgt. Pepper's Lonely Hearts Club Band" 
-        c:_1="The Beatles" />
-        
+        c:_0="Sgt. Pepper's Lonely Hearts Club Band"
+        c:artist="The Beatles"  />
+
+  <!--
+  CDPlayer cdPlayer = new CDPlayer(compactDisc);
+  -->
   <bean id="cdPlayer" class="soundsystem.CDPlayer"
-        c:_-ref="compactDisc" />
+        c:_0-ref="compactDisc" />
 
 </beans>

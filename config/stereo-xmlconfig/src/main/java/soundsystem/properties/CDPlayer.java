@@ -7,7 +7,6 @@ import soundsystem.MediaPlayer;
 public class CDPlayer implements MediaPlayer {
   private CompactDisc compactDisc;
 
-  @Autowired
   public void setCompactDisc(CompactDisc compactDisc) {
     this.compactDisc = compactDisc;
   }

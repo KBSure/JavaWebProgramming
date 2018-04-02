@@ -4,9 +4,25 @@
   xmlns:c="http://www.springframework.org/schema/c"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <!--같은 클래스로 인스턴스 2개 생성-->
-  <bean id="bean1" class="soundsystem.MyBean"></bean>
-  <!--<bean id="bean2" class="soundsystem.MyBean"></bean>-->
+  <bean id="bean1" class="soundsystem.MyBean" scope="prototype">
+    <property name="name" value="KBSure"></property>
+    <property name="count" value="100"></property>
+  </bean>
 
+  <!--파라미터를 2개 받는 생성자를 이용하여 필드를 초기화한다(construct-arg 이용)-->
+
+  <bean id="bean2" class="soundsystem.MyBean">
+  <constructor-arg value="KBSUre"></constructor-arg>
+  <constructor-arg value="100"></constructor-arg>
+</bean>
+
+  <bean id="bean3" class="soundsystem.MyBean">
+    <constructor-arg>
+      <map>
+        <entry key="1"><value>one</value></entry>
+        <entry key="2"><value>two</value></entry>
+      </map>
+    </constructor-arg>
+  </bean>
 </beans>
 

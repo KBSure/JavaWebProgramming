@@ -13,7 +13,10 @@
         p:title="Sgt. Pepper's Lonely Hearts Club Band"
         p:artist="The Beatles"
         p:tracks-ref="trackList" />
-
+<!--
+ List<String> trackList = new ArrayList<>();
+ trackList.add("Sgt. Pepper's Lonely Hearts Club Band");
+-->
   <util:list id="trackList">  
     <value>Sgt. Pepper's Lonely Hearts Club Band</value>
     <value>With a Little Help from My Friends</value>
