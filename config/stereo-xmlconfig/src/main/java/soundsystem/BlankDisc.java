@@ -1,5 +1,8 @@
 package soundsystem;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class BlankDisc implements CompactDisc {
 
   private String title;
