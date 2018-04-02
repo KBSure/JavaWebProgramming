@@ -20,8 +20,9 @@ public class GuestbookListServlet extends HttpServlet {
 
         RequestDispatcher requestDispatcher =
                 request.getRequestDispatcher("/list.jsp");
+//        requestDispatcher.forward(request, response);
 
-        requestDispatcher.forward(request, response);
+
     }
 
     @Override
