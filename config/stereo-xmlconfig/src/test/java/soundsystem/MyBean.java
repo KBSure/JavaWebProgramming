@@ -5,7 +5,7 @@ public class MyBean {
     private int count;
 
     public MyBean(){
-
+        System.out.println("MyBean 생성자 호출!!");
     }
 
     public String getName() {
