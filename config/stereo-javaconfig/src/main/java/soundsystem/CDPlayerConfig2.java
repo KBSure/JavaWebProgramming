@@ -2,13 +2,20 @@ package soundsystem;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//java config 클래스에는 @Configuration 이 클래스 위에 있어야 한다.
 @Configuration
-public class CDPlayerConfig {
+public class CDPlayerConfig2 {
 
-  // 메소드 이름이 id가 된다 .메소드 이름이 중복되면 id가 중복된다는 의미이기 때문에 안된다.
-  // <bean id="compactDisc" class="soundsystem.SgtPeppers"/>
-  // Bean 생성을 하는 메소드는 @Bean이 붙어야 한다.
+  // config 자바클래스를 Annotation~ApplicationContext가 byte코드로 변환(메서드가 오버라이딩 되어서 사용)
+  // 한 번도 호출된 적 없을 경우에 한 번 호출한다. -> 싱글턴이 보장된다.
+  // 호출은 변형된 클래스에서 호출.
+
+  // Bean을 생성하는 메소드는 2번째 호출될 경우
+  @Bean
+  public CDPlayer cdPlayer() {
+    System.out.println("cdPlayer() 호출");
+    return new CDPlayer(myDisc());
+  }
+
   @Bean
   public CompactDisc compactDisc() {
     System.out.println("compactDisc() 호출");
@@ -25,11 +32,7 @@ public class CDPlayerConfig {
   //  <construct-arg ref="compactDisc"/>
   // </bean>
 
-  @Bean
-  public CDPlayer cdPlayer(CompactDisc compactDisc) {
-    System.out.println("cdPlayer() 호출");
-    return new CDPlayer(compactDisc);
-  }
+
 //CompactDisc가 여러 개 있을 때 파라미터 변수명이 중요하다. 메서드 이름과 같아야 한다.
 
 }

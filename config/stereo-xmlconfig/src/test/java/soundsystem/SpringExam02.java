@@ -12,6 +12,8 @@ public class SpringExam02 {
         System.out.println(bean1.getCount());
         MyBean bean2 = context.getBean("bean1", MyBean.class);
 
+        MyBean bean21 = context.getBean("bean21", MyBean.class);
+
         MyBean bean3 = context.getBean("bean2", MyBean.class);
         System.out.println(bean3.getName());
         System.out.println(bean3.getCount());
@@ -20,10 +22,10 @@ public class SpringExam02 {
         System.out.println(bean4.getValue("1"));
 
 
-        if(bean1 == bean2){
-            System.out.println("bean1 == bean2");
+        if(bean3 == bean21){
+            System.out.println("bean3 == bean21");
         }else{
-            System.out.println("bean1 != bean2");
+            System.out.println("bean3 != bean21");
         }
 
     }

@@ -4,7 +4,7 @@
   xmlns:c="http://www.springframework.org/schema/c"
   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-  <bean id="bean1" class="soundsystem.MyBean" scope="prototype">
+  <bean id="bean1" class="soundsystem.MyBean" scope="singleton">
     <property name="name" value="KBSure"></property>
     <property name="count" value="100"></property>
   </bean>
@@ -15,6 +15,11 @@
   <constructor-arg value="KBSUre"></constructor-arg>
   <constructor-arg value="100"></constructor-arg>
 </bean>
+
+  <bean id="bean21" class="soundsystem.MyBean">
+    <constructor-arg value="KBSUre!!!"></constructor-arg>
+    <constructor-arg value="1001"></constructor-arg>
+  </bean>
 
   <bean id="bean3" class="soundsystem.MyBean">
     <constructor-arg>

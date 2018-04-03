@@ -11,8 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=CDPlayerConfig.class) //java config 명시 해줘야 함.
-public class CDPlayerTest {
+@ContextConfiguration
+public class PropertyRefTest {
 
   @Rule
   public final StandardOutputStreamLog log = new StandardOutputStreamLog();
@@ -24,7 +24,7 @@ public class CDPlayerTest {
   public void play() {
     player.play();
     assertEquals(
-        "Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\r\n",
+        "Playing Sgt. Pepper's Lonely Hearts Club Band by The Beatles\r\n", 
         log.getLog());
   }
 
