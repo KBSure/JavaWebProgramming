@@ -72,7 +72,7 @@
 				</configuration>
 			</plugin>
 
-			<!-- tomcat -->
+			<!-- maven에서 tomcat을 실행한다. -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
