@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app>
-
+<!--서블릿 스펙에 따라서 web-app 태그 안에 속성 달라지는 것 있지 않았나요?-->
   <display-name>Spring JavaConfig Sample</display-name>
 
   <servlet>
