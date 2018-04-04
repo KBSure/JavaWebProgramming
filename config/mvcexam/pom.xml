@@ -59,6 +59,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<!--//아래가 context root-->
 		<finalName>mvcexam</finalName>
 		<plugins>
 			<!--해당 플러그인이 저장안되어 있다면 maven프로젝트는 JDK 1.5를 사용-->
@@ -81,6 +82,7 @@
 					<charset>UTF-8</charset>
 					<uriEncoding>UTF-8</uriEncoding>
 					<port>8080</port>
+					<path>/</path>
 				</configuration>
 			</plugin>
 		</plugins>
