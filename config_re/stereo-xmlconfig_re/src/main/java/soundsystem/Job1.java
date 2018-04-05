@@ -7,7 +7,7 @@ public class Job1 implements BaseJob, BeanNameAware {
 
     @Override
     public void exec() {
-        System.out.println("Job1 exec()!!");
+        System.out.println(id + " exec()!!");
     }
 
     @Override
@@ -15,3 +15,5 @@ public class Job1 implements BaseJob, BeanNameAware {
         this.id = s;
     }
 }
+
+//BeanNameAware는 쓰는 경우 거의 없으려나?ㅎㅎ
