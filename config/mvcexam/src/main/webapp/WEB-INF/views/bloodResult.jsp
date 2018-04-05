@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-${name}님은 ${bloodType}이며, ${msg}
+${blood.name}님은 ${blood.bloodType}이며, ${blood.msg}<br>
+lala${name}
+${blood}
 </body>
 </html>

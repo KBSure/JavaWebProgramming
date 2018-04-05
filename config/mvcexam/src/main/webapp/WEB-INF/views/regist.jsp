@@ -8,5 +8,6 @@
 </head>
 <body>
 <h2>등록되었습니다.</h2>
+${user.name}
 </body>
 </html>
