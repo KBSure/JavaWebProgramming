@@ -8,7 +8,6 @@
 </head>
 <body>
 ${blood.name}님은 ${blood.bloodType}이며, ${blood.msg}<br>
-lala${name}
 ${blood}
 </body>
 </html>
