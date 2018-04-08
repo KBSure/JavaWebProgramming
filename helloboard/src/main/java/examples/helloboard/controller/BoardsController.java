@@ -2,19 +2,22 @@ package examples.helloboard.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping(value = "/boards") //Annotation 문법 공부 필요
 public class BoardsController {
-@GetMapping
+    @GetMapping
     public String boardList(){
         return "boards_list";
     }
 
-//    public String boardRead(){
-//        return "/views/boards_read";
-//    }
+    @GetMapping(value = "/{boardID}")
+    public String boardRead(@PathVariable(value = "boardID")Long boardID){
+
+        return "/views/boards_read";
+    }
 //
 //    public String boardWriteForm(){
 //        return "/views/boards_write_form";
