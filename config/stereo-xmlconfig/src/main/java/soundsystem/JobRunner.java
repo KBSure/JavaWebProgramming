@@ -23,6 +23,7 @@ public class JobRunner implements BeanFactoryAware{
     public void exec(){
         for(String jobName : list){
             BaseJob job = beanFactory.getBean(jobName, BaseJob.class);
+            //혹시 이 때 메모리에 새로 올라가나요?
             job.exec();
         }
     }
