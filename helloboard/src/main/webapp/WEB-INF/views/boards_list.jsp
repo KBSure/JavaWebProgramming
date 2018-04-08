@@ -14,14 +14,18 @@
 <h1> list</h1>
 
 1 <a href="/boards/1"> c언어 잘하는 법 </a> &nbsp;&nbsp; c언어고수 &nbsp;&nbsp; 2018-04-04 <br>
-2 <a href="/boards/2"> java 잘하는 법</a> &nbsp;&nbsp; java고수 &nbsp;&nbsp; 2018-04-05 <br>
-3 <a href="/boards/2"> python 잘하는 법</a> &nbsp;&nbsp; python고수 &nbsp;&nbsp; 2018-04-06 <br>
+2 <a href="/boards/2?page=2&searchType=title&searchStr=java"> java 잘하는 법</a> &nbsp;&nbsp; java고수 &nbsp;&nbsp; 2018-04-05 <br>
+3 <a href="/boards/3"> python 잘하는 법</a> &nbsp;&nbsp; python고수 &nbsp;&nbsp; 2018-04-06 <br>
 
-<a href="/boards/page=1">1</a> <a href="/boards/page=2">2</a> <a href="/boards/page=3">3</a><br>
+<a href="/boards/?page=1">1</a> <a href="/boards/?page=2">2</a> <a href="/boards/?page=3">3</a><br>
 
 검색 구현
 
-<a href="/boards/writeform"> 글쓰기 </a>
+
+<form action="/boards/writeform" method="get">
+    <input type="submit" value="글쓰기"></input>
+</form>
+
 
 </body>
 </html>

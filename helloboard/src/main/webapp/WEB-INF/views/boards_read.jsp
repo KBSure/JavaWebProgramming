@@ -13,5 +13,13 @@
     제가 쓴 글이고, 내용입니다.
 </pre>
 
+
+<form action="/boards/updateform" method="get">
+    <input type="submit" value="수정">
+</form>
+<form action="/boards/deleteform" method="get">
+    <input type="submit" value="삭제">
+</form>
+
 </body>
 </html>
