@@ -20,7 +20,7 @@ path        view                jsp                           parameter
 /boards (DELETE)    boards 리다이렉트    글이 삭제되고 리다이렉트된다.             boardId=50&passwd=hello
 
 /boards/updateform/{boardId}  boards_updateform
-/boards (PUT)      boards/{boardId} 글이 수정되고 글상세보기로 리다이렉트한다.
+/boards/{boadId} (PUT)      boards/{boardId} 글이 수정되고 글상세보기로 리다이렉트한다.
 
 
 게시판 목록보기

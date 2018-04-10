@@ -23,6 +23,7 @@
 
 
 <form action="/boards/writeform" method="get">
+
     <input type="submit" value="글쓰기"></input>
 </form>
 
