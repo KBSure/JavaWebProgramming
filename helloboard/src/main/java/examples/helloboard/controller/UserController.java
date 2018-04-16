@@ -1,5 +1,6 @@
 package examples.helloboard.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,8 +14,7 @@ import javax.servlet.http.HttpSession;
 @RequestMapping(path="/users")
 public class UserController {
     @GetMapping("/loginform")
-    public String loginform(@RequestParam(name="referer", required = false) String referer,
-                            ModelMap modelMap){
+    public String loginform(@RequestParam(name = "referer")String referer, ModelMap modelMap){
         modelMap.addAttribute("referer", referer);
         return "loginform";
     }
@@ -22,14 +22,12 @@ public class UserController {
     @PostMapping("/login")
     public String login(@RequestParam(name = "id") String id,
                         @RequestParam(name = "passwd") String passwd,
-                        @RequestParam(name="referer", required = false) String referer,
-                        HttpSession session){
-        // id, passwd가 일치하는 회원이 있으면 세션에 정보를 담는다.
-        session.setAttribute("loginFlag", id);
+                        @RequestParam(name = "referer", required = false) String referer){
+        //그냥 로그인
         if(referer == null || "".equals(referer)){
             return "redirect:/boards";
         }else{
-            return "redirect:" + referer;
+            return "redirect" + referer;
         }
     }
 }
