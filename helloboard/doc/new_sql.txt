@@ -1,0 +1,5 @@
+
+# 2단계.
+
+select * from ROLE;
+

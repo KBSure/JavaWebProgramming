@@ -1,3 +1,5 @@
+
+
 http://localhost:8080
 context root : /
 
@@ -14,13 +16,13 @@ path        view                jsp                           parameter
 /boards/{boardId}   boards_read       WEB-INF/views/boards_read       page=3&searchType=title&searchStr=apple
 
 /boards/writeform   boards_writeform   글쓰기폼이보여진다.         이름, 암호, 제목, 내용
-/boards (POST)      boards 리다이렉트     글 이 저장되고 리다이렉트된다.
+/boards (POST)      boards 리다이렉트     글이 저장되고 리다이렉트된다.
 
 /boards/deleteform/{boardId}  boards_deleteform  암호를 물어보는 폼이 보여진다.
 /boards (DELETE)    boards 리다이렉트    글이 삭제되고 리다이렉트된다.             boardId=50&passwd=hello
 
 /boards/updateform/{boardId}  boards_updateform
-/boards/{boadId} (PUT)      boards/{boardId} 글이 수정되고 글상세보기로 리다이렉트한다.
+/boards (PUT)      boards/{boardId} 글이 수정되고 글상세보기로 리다이렉트한다.
 
 
 게시판 목록보기
@@ -53,3 +55,12 @@ http://www.inven.co.kr/board/powerbbs.php?name=subject&keyword=확장&come_idx=1
 <a href=/boards>1</a> <a href=/boards?page=2>2</a> <a href=/boards?page=3>3</a>
 
 http://www.inven.co.kr/board/wow/17/33462
+
+
+
+
+
+
+
+
+

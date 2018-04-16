@@ -1,0 +1,9 @@
+create database helloboard;
+grant all privileges on helloboard.* to fastcamp@'%' identified by 'fastcamp';
+grant all privileges on helloboard.* to fastcamp@'localhost' identified by 'fastcamp';
+flush privileges;
+
+create database helloboard;
+grant all privileges on helloboard.* to fastcamp@`%` identified by 'fastcamp';
+grant all privileges on helloboard.* to fastcamp@`localhost` identified by 'fastcamp';
+flush privileges;

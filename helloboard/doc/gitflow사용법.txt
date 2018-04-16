@@ -1,0 +1,44 @@
+
+
+1. github : public 레파지토리를 생성 : test_repository
+2. local에서는 test_repository 디렉토리를 만들고,
+해당 디렉토리 안에서 다음과 같은 명령을 수행
+
+echo "# test_repository" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/urstory/test_repository.git
+git push -u origin master
+
+3. Sourcetree 에서 해당 레파지토리를 읽어온다.
+- 로컬저장소 추가하기
+  로컬의 test_repository 디렉토리를 추가한다.
+- 저장소 메뉴 - Gitflow 저장소 초기화 메뉴를 선택한다.
+
+제품 브랜치 : master
+개발 브랜치 : develop
+기능 브랜치 : feature
+릴리즈 브랜치 : release
+핫픽스 브랜치 : hotfix
+
+위와 같이 생성후 push를 한다.
+
+4. github 에서 develop 브랜치를 기본 브랜치로 지정한다.
+
+Settings - 기본 브랜치를 변경한다. (develop으로)
+
+5. 도구막대에 깃플로우를 추가한다.
+
+6. 새기능을 만들려면 깃플로우 아이콘을 클릭한 후 새기능 추가를 누른다.
+
+ex : create_readme_txt
+
+새기능 완료를 누르면 자동으로 머지된다.
+
+
+https://danielkummer.github.io/git-flow-cheatsheet/index.ko_KR.html
+
+
+https://milooy.wordpress.com/2017/06/21/working-together-with-github-tutorial/
+
