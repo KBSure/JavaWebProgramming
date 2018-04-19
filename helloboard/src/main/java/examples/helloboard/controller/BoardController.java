@@ -62,24 +62,31 @@ public class BoardController {
             @RequestParam(name = "title") String title,
             @RequestParam("file") MultipartFile file
     ){
-        System.out.println("title : " + title);
-        System.out.println("file name : " + file.getOriginalFilename()); //실제 파일명
-        System.out.println("file size : " + file.getSize()); // 파일 크기
-        System.out.println("file type : " + file.getContentType()); // 파일 type
+
+        System.out.println(title);
+        System.out.println(file.getContentType());
+        System.out.println(file.getOriginalFilename());
+        System.out.println(file.getSize());
+
+        //1. file을 저장할 것이다.
 
         // 중복된 파일 문제를 해결.
         // 외부에서는 직접 접근하면 안된다. ex> jsp를 업로드 실행할 수 없는 경로 (외부에서 접근하지 못하는 경로)
         // 하나의 폴더에 너무 많은 파일이 저장되면 관리하기 어렵다.
         // /tmp/helloboard 에 저장하도록 한다.
         // /tmp/helloboard/년/월/일/uuid
+
+        // 날짜 가져오기
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1; // 월은 0부터 시작
+        int month = cal.get(Calendar.MONTH) + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
+
 
         // 윈도우의 경우엔 디렉토리 구분자가 \
         // unix계열은 디렉토리 구분자가 /
         // File.separator 를 이용하여 디렉토리를 구분한다.
+
         StringBuffer sb = new StringBuffer("/tmp/helloboard/");
         sb.append(year);
         sb.append("/");
@@ -90,42 +97,49 @@ public class BoardController {
 
         String dir = sb.toString();
 
+
+        //1-1. 디렉토리가 존재하지 않는다면
+        // 디렉토리를 만들어준다.
+            // 디렉토리는 날짜별로
+
         File fileObj = new File(dir);
-        if(!fileObj.exists()){ // 해당 디렉토리가 존재하지 않는다면
-            fileObj.mkdirs(); // 하위 폴더까지 생성한다.
+        if(!fileObj.exists()){//디렉토리 존재 안하면
+            fileObj.mkdir();
         }
 
-        UUID uuid = UUID.randomUUID();
-        String saveFileName = uuid.toString();  // 파일명
-        String saveFilePath = dir + saveFileName; // 디렉토리 + 파일명
+        // 파일 이름 uuid 생성해서 파일 저장
 
-        //file.getBytes() // 망하자.
+
+        UUID uuid = UUID.randomUUID();
+        String saveFileName = uuid.toString();
+        String saveFilePath = dir + saveFileName;
+
+
         InputStream in = null;
-        FileOutputStream out = null;
+        OutputStream out = null;
         try {
             in = file.getInputStream();
             out = new FileOutputStream(saveFilePath);
+            // 버퍼 만들어서 받아와야지
             byte[] buffer = new byte[1024];
             int readCount = 0;
-            // 만약 파일길이가 1026
-            // 1024
-            // 2
-            while((readCount = in.read(buffer)) != -1){ // -1(EoF)
-                out.write(buffer, 0, readCount);
+            while((readCount = in.read(buffer)) != -1){ // 읽어온 게 있으면
+                out.write(buffer, 0, readCount); // 파일로 기록하자.
             }
-        }catch(Exception ex){
-            ex.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }finally {
             try {
                 in.close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            try {
+            try{
                 out.close();
-            } catch (IOException e) {
+            }catch (IOException e) {
                 e.printStackTrace();
             }
+
         }
 
 

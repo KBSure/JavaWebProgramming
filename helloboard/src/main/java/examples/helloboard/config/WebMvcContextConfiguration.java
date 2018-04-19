@@ -46,8 +46,8 @@ public class WebMvcContextConfiguration extends WebMvcConfigurerAdapter {
     }
 
     // 인터셉터를 추가하려면 해당 메소드를 오버라이딩 하고, 사용자가 작성한 인터셉터를 등록해야한다.
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor());
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new LoginInterceptor());
+//    }
 }

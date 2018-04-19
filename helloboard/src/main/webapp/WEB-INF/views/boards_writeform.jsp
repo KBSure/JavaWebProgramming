@@ -5,9 +5,9 @@
 </head>
 <body>
 <form method="post" action="/boards/write"
-      enctype="multipart/form-data">
+            enctype="multipart/form-data">
      title : <input type="text" name="title"><br>
-     <input type="file" name="file"><br>
+    file : <input type="file" name="file">
     <input type="submit">
 </form>
 

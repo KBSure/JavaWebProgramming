@@ -9,5 +9,9 @@ public class Test {
         }else{
             System.out.println("str1 != str5");
         }
+//        String[] split = System.getProperties().getProperty("java.class.path").split(";");
+//        for(int i = 0; i < split.length; i++){
+//            System.out.println(split[i]);
+//        }
     }
 }
