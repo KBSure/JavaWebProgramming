@@ -5,6 +5,7 @@ buildscript {
         metaModelsSourcesDir = file("target/querydsl/java/")
     }
     repositories {
+        //메이븐 중앙 저장소를 사용하도록 명시
         mavenCentral()
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -12,6 +13,7 @@ buildscript {
         jcenter()
     }
     dependencies {
+        //플러그인 클래스 경로
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
