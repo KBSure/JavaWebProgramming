@@ -5,7 +5,6 @@ buildscript {
         metaModelsSourcesDir = file("target/querydsl/java/")
     }
     repositories {
-        //메이븐 중앙 저장소를 사용하도록 명시
         mavenCentral()
         maven {
             url "https://plugins.gradle.org/m2/"
@@ -13,10 +12,11 @@ buildscript {
         jcenter()
     }
     dependencies {
-        //플러그인 클래스 경로
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
 }
+
+
 
 plugins {
     id 'io.franzbecker.gradle-lombok' version '1.12'
@@ -28,6 +28,12 @@ apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+gradle.projectsLoaded {
+    rootProject.allprojects {
+        buildDir = "build"
+    }
+}
 
 idea {
     module {
@@ -77,6 +83,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    compile('org.springframework.boot:spring-boot-starter-security')
     compile("com.querydsl:querydsl-sql-spatial:${querydslVersion}")
     compile("com.querydsl:querydsl-jpa:${querydslVersion}")
     compile("com.fasterxml.jackson.datatype:jackson-datatype-hibernate5")

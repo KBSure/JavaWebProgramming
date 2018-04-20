@@ -13,11 +13,20 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
-    //컴파일 때가 아니라 실행될 때 만들어진다.
-    //컴파일 때 만들어지는 건 Q File
 
     @Override
     public List<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User addUser(User user) {
+        User saveUser = userRepository.save(user); //save 메서드는 JPA 가지고 있음 // user와 연관된 것도 자동으로 저장됨
+        return saveUser;
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 }
