@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.Authenticator;
+import java.security.Principal;
 import java.util.List;
 
 @RestController //Web Api 리턴
@@ -16,7 +18,14 @@ public class UserApiController {
     UserService userService;
 
     @GetMapping
-    public List<User> getUsers(){
+    public List<User> getUsers(Principal principal){
+
+
+        System.out.println("-------------------------------");
+        System.out.println(principal.getName());
+        System.out.println("-------------------------------");
+        
+
         return userService.getUsers();
     }
 }

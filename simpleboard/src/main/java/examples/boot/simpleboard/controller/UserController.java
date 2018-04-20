@@ -29,6 +29,9 @@ public class UserController {
         return "users/joinform";
     }
 
+    @GetMapping(path = "/login")
+    public String login() {return "users/login"; }
+
     @PostMapping(path = "join")
     public String join(@ModelAttribute User user){
 

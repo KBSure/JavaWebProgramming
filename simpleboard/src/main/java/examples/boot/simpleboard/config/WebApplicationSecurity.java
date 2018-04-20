@@ -42,7 +42,7 @@ public class WebApplicationSecurity  extends WebSecurityConfigurerAdapter {
 //                .ignoringAntMatchers("/h2-console/**")
                 .and().headers().frameOptions().disable()
 //                여기까지 h2 콘솔 관련 설정
-                .and().formLogin()
+                .and().formLogin().loginPage("/users/login").usernameParameter("id").passwordParameter("password")
 //                .and().rememberMe().tokenRepository(simpleBoardTokenRepositoryImpl).rememberMeParameter("remember-me").tokenValiditySeconds(1209600)
                 .and().logout().permitAll();
     }
