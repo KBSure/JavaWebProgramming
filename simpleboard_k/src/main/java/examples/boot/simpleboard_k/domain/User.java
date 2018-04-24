@@ -1,4 +1,5 @@
-package examples.boot.simpleboard.domain;
+package examples.boot.simpleboard_k.domain;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -13,12 +14,14 @@ import java.util.List;
 @Table(name = "users")
 @Getter
 @Setter
+
 public class User implements Serializable {
     public User(){
         regdate = LocalDateTime.now();
     }
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;
@@ -26,10 +29,8 @@ public class User implements Serializable {
     private String password;
     private LocalDateTime regdate;
 
-    @OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinColumn(name="user_id") // 기존 테이블에 user_no 라는 Column이 대신 있었다면 새로운 Column(user_id)가 생기게 되는 것인가?
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER) //eager??
+    @JoinColumn(name="user_id")
     private List<UserRole> roles;
+
 }
-
-
-//joinColumn은 Users Table에 생기는 게 아니다. UserRole이 지정되어있는 테이블에 생긴다.

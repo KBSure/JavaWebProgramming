@@ -39,6 +39,9 @@ idea {
     module {
         sourceDirs += file('target/querydsl/java/')
         generatedSourceDirs += file('target/querydsl/java/')
+        outputDir file('build/classes/main')
+        testOutputDir file('build/classes/test')
+
     }
 }
 
@@ -94,3 +97,64 @@ dependencies {
     compile('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+//buildscript {
+//    ext {
+//        springBootVersion = '2.0.1.RELEASE'
+//    }
+//    repositories {
+//        mavenCentral()
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+//    }
+//}
+//
+//apply plugin: 'java'
+//apply plugin: 'eclipse'
+//apply plugin: 'idea'
+//apply plugin: 'org.springframework.boot'
+//apply plugin: 'io.spring.dependency-management'
+//
+//group = 'examples'
+//version = '0.0.1-SNAPSHOT'
+//sourceCompatibility = 1.8
+//
+//
+//gradle.projectsLoaded {
+//    rootProject.allprojects {
+//        buildDir = "build"
+//    }
+//}
+//
+//idea {
+//    module {
+////        sourceDirs += file('target/querydsl/java/')
+////        generatedSourceDirs += file('target/querydsl/java/')
+//        outputDir file('build/classes/main')
+//        testOutputDir file('build/classes/test')
+//    }
+//}
+//
+//
+//repositories {
+//    mavenCentral()
+//}
+//
+//
+//dependencies {
+//    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+//    compile('org.springframework.boot:spring-boot-starter-web')
+//    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+//    compile('org.springframework.boot:spring-boot-starter-security')
+//
+//    runtime('org.springframework.boot:spring-boot-devtools')
+//    runtime('com.h2database:h2:1.4.197')
+//    compileOnly('org.projectlombok:lombok')
+//    testCompile('org.springframework.boot:spring-boot-starter-test')
+//    testCompile('org.springframework.security:spring-security-test')
+//}
