@@ -18,11 +18,12 @@ public class WASMain {
             HttpRequest request = new HttpRequest();
             InputStream is = client.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
+            PrintWriter pw = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+
             String line = null;
 
             //HttpRequest에 넣어보기
             line = br.readLine();
-            System.out.println(line);
             String[] firstLineArgs = line.split(" ");
             request.setMethod(firstLineArgs[0]);
             request.setPath(firstLineArgs[1]);
@@ -36,12 +37,25 @@ public class WASMain {
                 }else if(headerArray[0].startsWith("Content-Length:")) {
                     request.setContentLength(Integer.parseInt(headerArray[1]));
                 }else if(headerArray[0].startsWith("User-Agent:")) {
-                    request.setUserAgent(line.substring(10));
+                    request.setUserAgent(line.substring(12));
                 }else if(headerArray[0].startsWith("Content-Type")) {
                     request.setContentType(headerArray[1].trim());
                 }
             }
+            System.out.println(request);
+
+            String body = "<h1>hello world!</h1>";
+
+            pw.println("HTTP/1.1 200 OK");
+            pw.println("Content-Type: text/html; charset=UTF-8");
+            pw.println("Content-Length: "+ body.length());
+            pw.println();
+            pw.write(body);
+            //pw.println(body);
+            pw.flush();
+
             br.close();
+            pw.close();
             client.close();
         } catch (IOException e) {
             e.printStackTrace();
