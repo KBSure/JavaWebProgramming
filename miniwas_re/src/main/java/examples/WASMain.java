@@ -15,15 +15,33 @@ public class WASMain {
             Socket client = listener.accept();
             System.out.println(client.toString());
 
-            InputStream inputStream = client.getInputStream();
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            HttpRequest request = new HttpRequest();
+            InputStream is = client.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(is));
             String line = null;
-            while((line = bufferedReader.readLine()) != null) {
+
+            //HttpRequest에 넣어보기
+            line = br.readLine();
+            System.out.println(line);
+            String[] firstLineArgs = line.split(" ");
+            request.setMethod(firstLineArgs[0]);
+            request.setPath(firstLineArgs[1]);
+
+            while((line = br.readLine()) != null) {
                 if("".equals(line))
                     break;
-                System.out.println(line);
+                String[] headerArray = line.split(" ");
+                if(headerArray[0].startsWith("Host:")) {
+                    request.setHost(headerArray[1]);
+                }else if(headerArray[0].startsWith("Content-Length:")) {
+                    request.setContentLength(Integer.parseInt(headerArray[1]));
+                }else if(headerArray[0].startsWith("User-Agent:")) {
+                    request.setUserAgent(line.substring(10));
+                }else if(headerArray[0].startsWith("Content-Type")) {
+                    request.setContentType(headerArray[1].trim());
+                }
             }
-            bufferedReader.close();
+            br.close();
             client.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -37,3 +55,13 @@ public class WASMain {
 
     }
 }
+
+//GET / HTTP/1.1
+//        Host: localhost:8080
+//        Connection: keep-alive
+//        Cache-Control: max-age=0
+//        Upgrade-Insecure-Requests: 1
+//        User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36
+//        Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8
+//Accept-Encoding: gzip, deflate, br
+//Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7
