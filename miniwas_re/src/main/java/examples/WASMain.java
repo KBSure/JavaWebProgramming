@@ -13,50 +13,15 @@ public class WASMain {
             listener = new ServerSocket(8080);
             System.out.println("Client를 기다립니다.");
             Socket client = listener.accept();
-            System.out.println(client.toString());
 
-            HttpRequest request = new HttpRequest();
-            InputStream is = client.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-
-            String line = null;
-
-            //HttpRequest에 넣어보기
-            line = br.readLine();
-            String[] firstLineArgs = line.split(" ");
-            request.setMethod(firstLineArgs[0]);
-            request.setPath(firstLineArgs[1]);
-
-            while((line = br.readLine()) != null) {
-                if("".equals(line))
-                    break;
-                String[] headerArray = line.split(" ");
-                if(headerArray[0].startsWith("Host:")) {
-                    request.setHost(headerArray[1]);
-                }else if(headerArray[0].startsWith("Content-Length:")) {
-                    request.setContentLength(Integer.parseInt(headerArray[1]));
-                }else if(headerArray[0].startsWith("User-Agent:")) {
-                    request.setUserAgent(line.substring(12));
-                }else if(headerArray[0].startsWith("Content-Type")) {
-                    request.setContentType(headerArray[1].trim());
+            new Thread(() -> {
+                try {
+                    handleSocket(client);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-            }
-            System.out.println(request);
+            }).start();
 
-            String body = "<h1>hello world!</h1>";
-
-            pw.println("HTTP/1.1 200 OK");
-            pw.println("Content-Type: text/html; charset=UTF-8");
-            pw.println("Content-Length: "+ body.length());
-            pw.println();
-            pw.write(body);
-            //pw.println(body);
-            pw.flush();
-
-            br.close();
-            pw.close();
-            client.close();
         } catch (IOException e) {
             e.printStackTrace();
         }   finally {
@@ -66,8 +31,56 @@ public class WASMain {
                 e.printStackTrace();
             }
         }
+    }
+
+    private static void handleSocket(Socket client) throws IOException {
+        System.out.println(client.toString());
+
+        HttpRequest request = new HttpRequest();
+        InputStream is = client.getInputStream();
+        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        PrintWriter pw = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+
+        String line = null;
+
+        //HttpRequest에 넣어보기
+        line = br.readLine();
+        String[] firstLineArgs = line.split(" ");
+        request.setMethod(firstLineArgs[0]);
+        request.setPath(firstLineArgs[1]);
+
+        while((line = br.readLine()) != null) {
+            if("".equals(line))
+                break;
+            String[] headerArray = line.split(" ");
+            if(headerArray[0].startsWith("Host:")) {
+                request.setHost(headerArray[1]);
+            }else if(headerArray[0].startsWith("Content-Length:")) {
+                request.setContentLength(Integer.parseInt(headerArray[1]));
+            }else if(headerArray[0].startsWith("User-Agent:")) {
+                request.setUserAgent(line.substring(12));
+            }else if(headerArray[0].startsWith("Content-Type")) {
+                request.setContentType(headerArray[1].trim());
+            }
+        }
+        System.out.println(request);
+
+        String body = "<h1>hello world!</h1>";
+
+        pw.println("HTTP/1.1 200 OK");
+        pw.println("Content-Type: text/html; charset=UTF-8");
+        pw.println("Content-Length: "+ body.length());
+        pw.println();
+        pw.write(body);
+        //pw.println(body);
+        pw.flush();
+
+        br.close();
+        pw.close();
+        client.close();
 
     }
+
 }
 
 //GET / HTTP/1.1
